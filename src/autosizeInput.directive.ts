@@ -37,7 +37,6 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
         const factory = this.resolver.resolveComponentFactory(AutosizeComponent);
         this.autosizeComponent = this.vc.createComponent(factory).instance;
         for (const prop of this.cssProps){
-            // this.autosizeComponent.shadowElement.nativeElement.style = getComputedStyle(this.element.nativeElement);
             this.autosizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[prop];
         }
         this.ngModel.valueChanges.subscribe(response => {
@@ -50,7 +49,6 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
     }
 
     adjust(): void {
-        // this.element.nativeElement.style.minWidth = '50px';
-        this.element.nativeElement.style.width = this.autosizeComponent.sizeElement.nativeElement.offsetWidth + 10 + 'px';
+        this.element.nativeElement.style.width = this.autosizeComponent.el.nativeElement.offsetWidth + 'px';
     }
 }
