@@ -4,10 +4,18 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+/* Import prism core */
+import 'prismjs/prism';
+
+/* Import the language you need to highlight */
+import 'prismjs/components/prism-typescript';
+
+import { PrismComponent } from 'angular-prism';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    PrismComponent
   ],
   imports: [
     BrowserModule,
