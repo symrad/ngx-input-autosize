@@ -1,11 +1,11 @@
-import { NgModel } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import { AutosizeComponent } from './autosizeInput.component';
 import { ElementRef, AfterContentChecked, OnInit, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 export declare class AutosizeDirective implements AfterContentChecked, OnInit {
     private resolver;
     private element;
     private vc;
-    private ngModel;
+    private ngControl;
     base: number;
     supportedInputTypes: string[];
     cssProps: string[];
@@ -13,7 +13,7 @@ export declare class AutosizeDirective implements AfterContentChecked, OnInit {
     placeholderAutoSizeComponent: AutosizeComponent;
     placeholder: String;
     onInput(textArea: HTMLInputElement): void;
-    constructor(resolver: ComponentFactoryResolver, element: ElementRef, vc: ViewContainerRef, ngModel: NgModel);
+    constructor(resolver: ComponentFactoryResolver, element: ElementRef, vc: ViewContainerRef, ngControl: NgControl);
     ngOnInit(): void;
     ngAfterContentChecked(): void;
     adjust(): void;

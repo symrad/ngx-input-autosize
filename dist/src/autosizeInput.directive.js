@@ -1,12 +1,12 @@
-import { NgModel } from '@angular/forms';
+import { NgControl } from '@angular/forms';
 import { AutosizeComponent } from './autosizeInput.component';
 import { ElementRef, HostListener, Directive, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 var AutosizeDirective = (function () {
-    function AutosizeDirective(resolver, element, vc, ngModel) {
+    function AutosizeDirective(resolver, element, vc, ngControl) {
         this.resolver = resolver;
         this.element = element;
         this.vc = vc;
-        this.ngModel = ngModel;
+        this.ngControl = ngControl;
         this.supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
         this.cssProps = [
             'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
@@ -39,8 +39,8 @@ var AutosizeDirective = (function () {
         if (this.element.nativeElement.placeholder) {
             this.placeholder = this.element.nativeElement.placeholder;
         }
-        if (this.ngModel.valueChanges) {
-            this.ngModel.valueChanges.subscribe(function (response) {
+        if (this.ngControl.valueChanges) {
+            this.ngControl.valueChanges.subscribe(function (response) {
                 _this.autosizeComponent.autosizeValue = response;
                 _this.placeholderAutoSizeComponent.autosizeValue = _this.placeholder;
             });
@@ -50,7 +50,8 @@ var AutosizeDirective = (function () {
         this.adjust();
     };
     AutosizeDirective.prototype.adjust = function () {
-        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth) {
+        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth
+            && !this.ngControl.value) {
             this.element.nativeElement.style.width = this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth + 'px';
         }
         else {
@@ -70,7 +71,7 @@ AutosizeDirective.ctorParameters = function () { return [
     { type: ComponentFactoryResolver, },
     { type: ElementRef, },
     { type: ViewContainerRef, },
-    { type: NgModel, },
+    { type: NgControl, },
 ]; };
 AutosizeDirective.propDecorators = {
     'onInput': [{ type: HostListener, args: ['input', ['$event.target'],] },],

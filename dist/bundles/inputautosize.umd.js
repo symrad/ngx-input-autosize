@@ -27,11 +27,11 @@ AutosizeComponent.propDecorators = {
 };
 
 var AutosizeDirective = (function () {
-    function AutosizeDirective(resolver, element, vc, ngModel) {
+    function AutosizeDirective(resolver, element, vc, ngControl) {
         this.resolver = resolver;
         this.element = element;
         this.vc = vc;
-        this.ngModel = ngModel;
+        this.ngControl = ngControl;
         this.supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
         this.cssProps = [
             'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
@@ -64,8 +64,8 @@ var AutosizeDirective = (function () {
         if (this.element.nativeElement.placeholder) {
             this.placeholder = this.element.nativeElement.placeholder;
         }
-        if (this.ngModel.valueChanges) {
-            this.ngModel.valueChanges.subscribe(function (response) {
+        if (this.ngControl.valueChanges) {
+            this.ngControl.valueChanges.subscribe(function (response) {
                 _this.autosizeComponent.autosizeValue = response;
                 _this.placeholderAutoSizeComponent.autosizeValue = _this.placeholder;
             });
@@ -75,7 +75,8 @@ var AutosizeDirective = (function () {
         this.adjust();
     };
     AutosizeDirective.prototype.adjust = function () {
-        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth) {
+        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth
+            && !this.ngControl.value) {
             this.element.nativeElement.style.width = this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth + 'px';
         }
         else {
@@ -94,7 +95,7 @@ AutosizeDirective.ctorParameters = function () { return [
     { type: core.ComponentFactoryResolver, },
     { type: core.ElementRef, },
     { type: core.ViewContainerRef, },
-    { type: forms.NgModel, },
+    { type: forms.NgControl, },
 ]; };
 AutosizeDirective.propDecorators = {
     'onInput': [{ type: core.HostListener, args: ['input', ['$event.target'],] },],

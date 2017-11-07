@@ -1,4 +1,4 @@
-import { NgModel } from '@angular/forms';
+import { NgModel, NgControl } from '@angular/forms';
 import { AutosizeComponent } from './autosize.component';
 import { ElementRef, HostListener, Directive, AfterContentChecked, OnInit,
     ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
@@ -28,7 +28,7 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
         private resolver: ComponentFactoryResolver,
         private element: ElementRef,
         private vc: ViewContainerRef,
-        private ngModel: NgModel
+        private ngControl: NgControl
     ) {
 
     }
@@ -43,18 +43,21 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
                 this.autosizeComponent.shadowElement.nativeElement.style[prop] = this.element.nativeElement.currentStyle[prop];
                 this.placeholderAutoSizeComponent.shadowElement.nativeElement.style[prop] = this.element.nativeElement.currentStyle[prop];
             } else if (window.getComputedStyle) {
-                this.autosizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[prop];
+                this.autosizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[<any>prop];
                 // tslint:disable-next-line:max-line-length
-                this.placeholderAutoSizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[prop];
+                this.placeholderAutoSizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[<any>prop];
             }
         }
         if (this.element.nativeElement.placeholder) {
             this.placeholder = this.element.nativeElement.placeholder;
         }
-        this.ngModel.valueChanges.subscribe(response => {
-            this.autosizeComponent.autosizeValue = response;
-            this.placeholderAutoSizeComponent.autosizeValue = this.placeholder;
-        });
+
+        if (this.ngControl.valueChanges) {
+            this.ngControl.valueChanges.subscribe(response => {
+                this.autosizeComponent.autosizeValue = response;
+                this.placeholderAutoSizeComponent.autosizeValue = this.placeholder;
+            });
+        }
     }
 
     ngAfterContentChecked(): void {
@@ -62,7 +65,8 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
     }
 
     adjust(): void {
-        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth) {
+        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth
+            && !this.ngControl.value) {
             this.element.nativeElement.style.width = this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth + 'px';
         } else {
             this.element.nativeElement.style.width = this.autosizeComponent.el.nativeElement.offsetWidth + 'px';
