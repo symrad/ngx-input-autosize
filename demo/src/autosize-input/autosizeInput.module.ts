@@ -1,4 +1,4 @@
-import { AutosizeComponent } from './autosizeInput.component';
+import { AutosizeComponent } from './autosize.component';
 import { AutosizeDirective } from './autosizeInput.directive';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';

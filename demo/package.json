@@ -1,4 +1,16 @@
 {
+  "name": "ngx-input-autosize",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "test": "ng test",
+    "lint": "ng lint",
+    "e2e": "ng e2e"
+  },
+  "private": true,
   "dependencies": {
     "@angular/animations": "^4.2.4",
     "@angular/common": "^4.2.4",
@@ -33,11 +45,5 @@
     "ts-node": "~3.2.0",
     "tslint": "~5.7.0",
     "typescript": "~2.3.3"
-  },
-  "scripts": {
-    "transpile": "ngc",
-    "package": "rollup -c",
-    "minify": "uglifyjs dist/bundles/inputautosize.umd.js --screw-ie8 --compress --mangle --comments --output dist/bundles/inputautosize.umd.min.js",
-    "build": "npm run transpile && npm run package && npm run minify"
   }
 }

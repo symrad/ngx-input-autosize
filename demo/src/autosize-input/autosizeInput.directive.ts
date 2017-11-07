@@ -1,6 +1,6 @@
 import { NgModel } from '@angular/forms';
 import { element } from 'protractor';
-import { AutosizeComponent } from './autosizeInput.component';
+import { AutosizeComponent } from './autosize.component';
 import { ElementRef, HostListener, Directive, AfterContentChecked, OnInit,
     ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 
@@ -9,16 +9,16 @@ import { ElementRef, HostListener, Directive, AfterContentChecked, OnInit,
 })
 
 export class AutosizeDirective implements AfterContentChecked, OnInit {
-    public base: number;
-    public supportedInputTypes: Array<string> = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
-    public cssProps:Array<string> = [
+    base: number;
+    supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
+    cssProps = [
         'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
         'letterSpacing', 'textTransform', 'wordSpacing', 'textIndent',
         'boxSizing', 'borderLeftWidth', 'borderRightWidth', 'borderLeftStyle', 'borderRightStyle',
         'paddingLeft', 'paddingRight', 'marginLeft', 'marginRight'
     ];
-    public autosizeValue: any;
-    public autosizeComponent: AutosizeComponent;
+    autosizeValue;
+    autosizeComponent: AutosizeComponent;
 
     @HostListener('input', ['$event.target']) onInput(textArea: HTMLInputElement): void {
         this.adjust();
@@ -40,14 +40,12 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
             if (this.element.nativeElement.currentStyle) {
                 this.autosizeComponent.shadowElement.nativeElement.style[prop] = this.element.nativeElement.currentStyle[prop];
             } else if (window.getComputedStyle) {
-                this.autosizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[<any>prop];
+                this.autosizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[prop];
             }
         }
-        if(this.ngModel.valueChanges){
-            this.ngModel.valueChanges.subscribe(response => {
-                this.autosizeComponent.autosizeValue = response;
-            });
-        }
+        this.ngModel.valueChanges.subscribe(response => {
+            this.autosizeComponent.autosizeValue = response;
+        });
     }
 
     ngAfterContentChecked(): void {

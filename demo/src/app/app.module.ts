@@ -1,5 +1,5 @@
+import { AutosizeInputModule } from './../autosize-input/autosizeInput.module';
 import { FormsModule } from '@angular/forms';
-import { AutosizeInputModule } from './../../src/autosizeInput.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
