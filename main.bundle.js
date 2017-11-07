@@ -199,11 +199,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 var AutosizeDirective = (function () {
-    function AutosizeDirective(resolver, element, vc, ngModel) {
+    function AutosizeDirective(resolver, element, vc, ngControl) {
         this.resolver = resolver;
         this.element = element;
         this.vc = vc;
-        this.ngModel = ngModel;
+        this.ngControl = ngControl;
         this.supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
         this.cssProps = [
             'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
@@ -236,16 +236,19 @@ var AutosizeDirective = (function () {
         if (this.element.nativeElement.placeholder) {
             this.placeholder = this.element.nativeElement.placeholder;
         }
-        this.ngModel.valueChanges.subscribe(function (response) {
-            _this.autosizeComponent.autosizeValue = response;
-            _this.placeholderAutoSizeComponent.autosizeValue = _this.placeholder;
-        });
+        if (this.ngControl.valueChanges) {
+            this.ngControl.valueChanges.subscribe(function (response) {
+                _this.autosizeComponent.autosizeValue = response;
+                _this.placeholderAutoSizeComponent.autosizeValue = _this.placeholder;
+            });
+        }
     };
     AutosizeDirective.prototype.ngAfterContentChecked = function () {
         this.adjust();
     };
     AutosizeDirective.prototype.adjust = function () {
-        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth) {
+        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth
+            && !this.ngControl.value) {
             this.element.nativeElement.style.width = this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth + 'px';
         }
         else {
@@ -264,7 +267,7 @@ AutosizeDirective = __decorate([
     Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["Directive"])({
         selector: 'input[autosize]'
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ComponentFactoryResolver"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ComponentFactoryResolver"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ElementRef"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ViewContainerRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ViewContainerRef"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* NgModel */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* NgModel */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ComponentFactoryResolver"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ComponentFactoryResolver"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ElementRef"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ViewContainerRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ViewContainerRef"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* NgControl */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* NgControl */]) === "function" && _d || Object])
 ], AutosizeDirective);
 
 var _a, _b, _c, _d;
