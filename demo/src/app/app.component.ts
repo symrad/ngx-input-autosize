@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
-  test;
+  test = 'fdhsjkfhjksdhf sdhf hsdkj fhkjsdhfks';
   tsCode = `@Component({
     selector: 'my-app',
     templateUrl: 'my-app.html'

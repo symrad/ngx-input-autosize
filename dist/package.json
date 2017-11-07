@@ -1,0 +1,28 @@
+    {
+    "name": "ngx-input-autosize",
+    "version": "1.0.1",
+    "description": "A text input for Angular that resizes itself to the current content.",
+    "main": "bundles/ngxinputautosize.umd.js",
+    "module": "index.js",
+    "typings": "index.d.ts",
+    "keywords": [
+      "angular",
+      "angular2",
+      "angular 2",
+      "angular4"
+    ],
+    "author": "Simone Radice",
+    "license": "MIT",
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/symrad/ngx-input-autosize.git"
+    },
+    "homepage": "https://github.com/symrad/ngx-input-autosize",
+    "bugs": {
+      "url": "https://github.com/symrad/ngx-input-autosize/issues"
+    },
+    "peerDependencies": {
+      "@angular/core": "^2.4.0 || ^5.0.0",
+      "rxjs": "^5.0.1"
+    }
+  }

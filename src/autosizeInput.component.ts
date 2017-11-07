@@ -1,4 +1,3 @@
-import { element } from 'protractor';
 import { Component, ViewContainerRef, ComponentFactoryResolver, NgZone, VERSION, ViewChild, Input, ElementRef } from '@angular/core';
 
 @Component({
