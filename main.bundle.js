@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n<div style=\"text-align:center\">\n  <h1>\n    Welcome to {{title}}!\n  </h1>\n  <img width=\"300\" src=\"data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==\">\n</div>\n<h2>Here are some links to help you start: </h2>\n<ul>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://angular.io/tutorial\">Tour of Heroes</a></h2>\n  </li>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://github.com/angular/angular-cli/wiki\">CLI Documentation</a></h2>\n  </li>\n  <li>\n    <h2><a target=\"_blank\" rel=\"noopener\" href=\"https://blog.angular.io/\">Angular blog</a></h2>\n  </li>\n</ul>\n<input autosize [(ngModel)]=\"test\" style=\"min-width:30px;font-size:30px\" />\n\n"
+module.exports = "<nav class=\"navbar navbar-light bg-faded\">\n  <h1 class=\"navbar-brand mb-0\">Ngx-input-autosize</h1>\n</nav>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <br/>\n      <br/>\n      <h3>Example</h3>\n      <br/>\n      <input autosize [(ngModel)]=\"test\" style=\"min-width:30px;font-size:30px\" />\n      <br/><br/><br/>\n    </div>\n  </div>\n  <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <h3>MyAppModule.ts</h3>\n        <br/>\n        <prism-block [code]=\"tsModuleCode\" [language]=\"'typescript'\"></prism-block>\n        <br/><br/>\n        <h3>MyAppComponent.ts</h3>\n        <br/>\n        <prism-block [code]=\"tsCode\" [language]=\"'typescript'\"></prism-block>\n        <br/><br/>\n        <h3>my-app.html</h3>\n        <br/>\n        <prism-block [code]=\"htmlCode\" [language]=\"'html'\"></prism-block>\n      </div>\n    </div>\n</div>\n\n"
 
 /***/ }),
 
@@ -58,11 +58,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'app';
+        this.tsCode = "@Component({\n    selector: 'my-app',\n    templateUrl: 'my-app.html'\n  })\n  export class MyAppComponent{\n    model;\n  }";
+        this.tsModuleCode = "@NgModule({\n    declarations: [\n      MyAppComponent\n    ],\n    imports: [\n      BrowserModule,\n      AutosizeInputModule,\n      FormsModule\n    ],\n    providers: [],\n    bootstrap: [MyAppComponent]\n  })\n  export class MyAppModule { }";
+        this.htmlCode = "<input autosize [(ngModel)]=\"model\" style=\"min-width:30px;font-size:30px\" />";
     }
     return AppComponent;
 }());
 AppComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'app-root',
         template: __webpack_require__("../../../../../src/app/app.component.html"),
         styles: [__webpack_require__("../../../../../src/app/app.component.css")]
@@ -83,6 +86,12 @@ AppComponent = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__ = __webpack_require__("../../../platform-browser/@angular/platform-browser.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__app_component__ = __webpack_require__("../../../../../src/app/app.component.ts");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prismjs_prism__ = __webpack_require__("../../../../prismjs/prism.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_prismjs_prism___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_prismjs_prism__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prismjs_components_prism_typescript__ = __webpack_require__("../../../../prismjs/components/prism-typescript.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_prismjs_components_prism_typescript___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_prismjs_components_prism_typescript__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular_prism__ = __webpack_require__("../../../../angular-prism/dist/angular-prism.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7_angular_prism___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7_angular_prism__);
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -94,15 +103,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
+/* Import prism core */
+
+/* Import the language you need to highlight */
+
+
 var AppModule = (function () {
     function AppModule() {
     }
     return AppModule;
 }());
 AppModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["L" /* NgModule */])({
+    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["NgModule"])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */]
+            __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* AppComponent */],
+            __WEBPACK_IMPORTED_MODULE_7_angular_prism__["PrismComponent"]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_2__angular_platform_browser__["a" /* BrowserModule */],
@@ -141,20 +156,20 @@ var AutosizeComponent = (function () {
     return AutosizeComponent;
 }());
 __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["E" /* Input */])('autosizeValue'),
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Input"])('autosizeValue'),
     __metadata("design:type", Object)
 ], AutosizeComponent.prototype, "autosizeValue", void 0);
 __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* ViewChild */])('shadowElement'),
-    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _a || Object)
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["ViewChild"])('shadowElement'),
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _a || Object)
 ], AutosizeComponent.prototype, "shadowElement", void 0);
 AutosizeComponent = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["n" /* Component */])({
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
         selector: 'div[autosize]',
         template: "<span style=\"white-space:pre;\" #shadowElement>{{autosizeValue}}</span>",
         styles: [':host { display:block;position: fixed; visibility:hidden; top: -9999px; left: 0px;}']
     }),
-    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["u" /* ElementRef */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_core__["ElementRef"]) === "function" && _b || Object])
 ], AutosizeComponent);
 
 var _a, _b;
@@ -225,16 +240,16 @@ var AutosizeDirective = (function () {
     return AutosizeDirective;
 }());
 __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["z" /* HostListener */])('input', ['$event.target']),
+    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["HostListener"])('input', ['$event.target']),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], AutosizeDirective.prototype, "onInput", null);
 AutosizeDirective = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["t" /* Directive */])({
+    Object(__WEBPACK_IMPORTED_MODULE_2__angular_core__["Directive"])({
         selector: 'input[autosize]'
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["p" /* ComponentFactoryResolver */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["p" /* ComponentFactoryResolver */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["u" /* ElementRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["u" /* ElementRef */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["_15" /* ViewContainerRef */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["_15" /* ViewContainerRef */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* NgModel */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* NgModel */]) === "function" && _d || Object])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ComponentFactoryResolver"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ComponentFactoryResolver"]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ElementRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ElementRef"]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_core__["ViewContainerRef"] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_core__["ViewContainerRef"]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* NgModel */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_0__angular_forms__["b" /* NgModel */]) === "function" && _d || Object])
 ], AutosizeDirective);
 
 var _a, _b, _c, _d;
@@ -269,7 +284,7 @@ var AutosizeInputModule = (function () {
     return AutosizeInputModule;
 }());
 AutosizeInputModule = __decorate([
-    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["L" /* NgModule */])({
+    Object(__WEBPACK_IMPORTED_MODULE_3__angular_core__["NgModule"])({
         declarations: [
             __WEBPACK_IMPORTED_MODULE_1__autosizeInput_directive__["a" /* AutosizeDirective */],
             __WEBPACK_IMPORTED_MODULE_0__autosize_component__["a" /* AutosizeComponent */]
@@ -321,7 +336,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 if (__WEBPACK_IMPORTED_MODULE_3__environments_environment__["a" /* environment */].production) {
-    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_20" /* enableProdMode */])();
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["enableProdMode"])();
 }
 Object(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_2__app_app_module__["a" /* AppModule */])
     .catch(function (err) { return console.log(err); });
