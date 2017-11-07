@@ -38,7 +38,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<nav class=\"navbar navbar-light bg-faded\">\n  <h1 class=\"navbar-brand mb-0\">Ngx-input-autosize</h1>\n</nav>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <br/>\n      <br/>\n      <h3>Example</h3>\n      <br/>\n      <input autosize [(ngModel)]=\"test\" style=\"min-width:30px;font-size:30px\" />\n      <br/><br/><br/>\n    </div>\n  </div>\n  <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <h3>MyAppModule.ts</h3>\n        <br/>\n        <prism-block [code]=\"tsModuleCode\" [language]=\"'typescript'\"></prism-block>\n        <br/><br/>\n        <h3>MyAppComponent.ts</h3>\n        <br/>\n        <prism-block [code]=\"tsCode\" [language]=\"'typescript'\"></prism-block>\n        <br/><br/>\n        <h3>my-app.html</h3>\n        <br/>\n        <prism-block [code]=\"htmlCode\" [language]=\"'html'\"></prism-block>\n      </div>\n    </div>\n</div>\n\n"
+module.exports = "<nav class=\"navbar navbar-light bg-faded\">\n  <h1 class=\"navbar-brand mb-0\">Ngx-input-autosize</h1>\n</nav>\n<div class=\"container\">\n  <div class=\"row\">\n    <div class=\"col-xs-12\">\n      <br/>\n      <br/>\n      <h3>Example</h3>\n      <br/>\n      <input autosize [(ngModel)]=\"test\" style=\"font-size:30px;padding:0 15px\" placeholder=\"Write Here\" />\n      <br/><br/><br/>\n    </div>\n  </div>\n  <div class=\"row\">\n      <div class=\"col-xs-12\">\n        <h3>MyAppModule.ts</h3>\n        <br/>\n        <prism-block [code]=\"tsModuleCode\" [language]=\"'typescript'\"></prism-block>\n        <br/><br/>\n        <h3>MyAppComponent.ts</h3>\n        <br/>\n        <prism-block [code]=\"tsCode\" [language]=\"'typescript'\"></prism-block>\n        <br/><br/>\n        <h3>my-app.html</h3>\n        <br/>\n        <prism-block [code]=\"htmlCode\" [language]=\"'html'\"></prism-block>\n      </div>\n  </div>\n</div>\n<br/>\n<br/>\n\n"
 
 /***/ }),
 
@@ -58,9 +58,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'app';
+        this.test = '';
         this.tsCode = "@Component({\n    selector: 'my-app',\n    templateUrl: 'my-app.html'\n  })\n  export class MyAppComponent{\n    model;\n  }";
         this.tsModuleCode = "@NgModule({\n    declarations: [\n      MyAppComponent\n    ],\n    imports: [\n      BrowserModule,\n      AutosizeInputModule,\n      FormsModule\n    ],\n    providers: [],\n    bootstrap: [MyAppComponent]\n  })\n  export class MyAppModule { }";
-        this.htmlCode = "<input autosize [(ngModel)]=\"model\" style=\"min-width:30px;font-size:30px\" />";
+        this.htmlCode = "<input autosize [(ngModel)]=\"test\" style=\"font-size:30px;padding:0 15px\" placeholder=\"Write Here\" />";
     }
     return AppComponent;
 }());
@@ -210,6 +211,7 @@ var AutosizeDirective = (function () {
             'boxSizing', 'borderLeftWidth', 'borderRightWidth', 'borderLeftStyle', 'borderRightStyle',
             'paddingLeft', 'paddingRight', 'marginLeft', 'marginRight'
         ];
+        this.placeholder = '';
     }
     AutosizeDirective.prototype.onInput = function (textArea) {
         this.adjust();
@@ -218,24 +220,37 @@ var AutosizeDirective = (function () {
         var _this = this;
         var factory = this.resolver.resolveComponentFactory(__WEBPACK_IMPORTED_MODULE_1__autosize_component__["a" /* AutosizeComponent */]);
         this.autosizeComponent = this.vc.createComponent(factory).instance;
+        this.placeholderAutoSizeComponent = this.vc.createComponent(factory).instance;
         for (var _i = 0, _a = this.cssProps; _i < _a.length; _i++) {
             var prop = _a[_i];
             if (this.element.nativeElement.currentStyle) {
                 this.autosizeComponent.shadowElement.nativeElement.style[prop] = this.element.nativeElement.currentStyle[prop];
+                this.placeholderAutoSizeComponent.shadowElement.nativeElement.style[prop] = this.element.nativeElement.currentStyle[prop];
             }
             else if (window.getComputedStyle) {
                 this.autosizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[prop];
+                // tslint:disable-next-line:max-line-length
+                this.placeholderAutoSizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[prop];
             }
+        }
+        if (this.element.nativeElement.placeholder) {
+            this.placeholder = this.element.nativeElement.placeholder;
         }
         this.ngModel.valueChanges.subscribe(function (response) {
             _this.autosizeComponent.autosizeValue = response;
+            _this.placeholderAutoSizeComponent.autosizeValue = _this.placeholder;
         });
     };
     AutosizeDirective.prototype.ngAfterContentChecked = function () {
         this.adjust();
     };
     AutosizeDirective.prototype.adjust = function () {
-        this.element.nativeElement.style.width = this.autosizeComponent.el.nativeElement.offsetWidth + 'px';
+        if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth) {
+            this.element.nativeElement.style.width = this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth + 'px';
+        }
+        else {
+            this.element.nativeElement.style.width = this.autosizeComponent.el.nativeElement.offsetWidth + 'px';
+        }
     };
     return AutosizeDirective;
 }());
