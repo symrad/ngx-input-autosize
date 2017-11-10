@@ -48,13 +48,13 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
                 this.placeholderAutoSizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[<any>prop];
             }
         }
-        if (this.element.nativeElement.placeholder) {
-            this.placeholder = this.element.nativeElement.placeholder;
-        }
 
         if (this.ngControl.valueChanges) {
             this.ngControl.valueChanges.subscribe(response => {
                 this.autosizeComponent.autosizeValue = response;
+                if (this.element.nativeElement.placeholder) {
+                    this.placeholder = this.element.nativeElement.placeholder;
+                }
                 this.placeholderAutoSizeComponent.autosizeValue = this.placeholder;
             });
         }

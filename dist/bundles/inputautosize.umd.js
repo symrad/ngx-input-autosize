@@ -61,12 +61,12 @@ var AutosizeDirective = (function () {
                 this.placeholderAutoSizeComponent.shadowElement.nativeElement.style[prop] = getComputedStyle(this.element.nativeElement)[prop];
             }
         }
-        if (this.element.nativeElement.placeholder) {
-            this.placeholder = this.element.nativeElement.placeholder;
-        }
         if (this.ngControl.valueChanges) {
             this.ngControl.valueChanges.subscribe(function (response) {
                 _this.autosizeComponent.autosizeValue = response;
+                if (_this.element.nativeElement.placeholder) {
+                    _this.placeholder = _this.element.nativeElement.placeholder;
+                }
                 _this.placeholderAutoSizeComponent.autosizeValue = _this.placeholder;
             });
         }
