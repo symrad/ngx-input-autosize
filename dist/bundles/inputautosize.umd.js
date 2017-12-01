@@ -1,7 +1,7 @@
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('@angular/core'), require('@angular/forms'), require('@angular/common')) :
 	typeof define === 'function' && define.amd ? define(['exports', '@angular/core', '@angular/forms', '@angular/common'], factory) :
-	(factory((global.ng = global.ng || {}, global.ng.inputautosize = {}),global.ng.core,global.ng.forms,global.ng.common));
+	(factory((global.ng = global.ng || {}, global.ng.inputautosize = {}),global.core,global.forms,global.common));
 }(this, (function (exports,core,forms,common) { 'use strict';
 
 var AutosizeComponent = (function () {
@@ -72,6 +72,9 @@ var AutosizeDirective = (function () {
         }
     };
     AutosizeDirective.prototype.ngAfterContentChecked = function () {
+        this.adjust();
+    };
+    AutosizeDirective.prototype.ngAfterViewChecked = function () {
         this.adjust();
     };
     AutosizeDirective.prototype.adjust = function () {

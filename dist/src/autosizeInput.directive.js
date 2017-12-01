@@ -49,6 +49,9 @@ var AutosizeDirective = (function () {
     AutosizeDirective.prototype.ngAfterContentChecked = function () {
         this.adjust();
     };
+    AutosizeDirective.prototype.ngAfterViewChecked = function () {
+        this.adjust();
+    };
     AutosizeDirective.prototype.adjust = function () {
         if (this.placeholderAutoSizeComponent.el.nativeElement.offsetWidth >= this.autosizeComponent.el.nativeElement.offsetWidth
             && !this.ngControl.value) {

@@ -1,3 +1,6 @@
+import resolve from 'rollup-plugin-node-resolve';
+import commonjs from 'rollup-plugin-commonjs';
+
 export default {
   input: 'dist/index.js',
   output:{
@@ -6,16 +9,13 @@ export default {
   },
   sourceMap: false,
   name: 'ng.inputautosize',
-  globals: {
-    '@angular/core': 'ng.core',
-    '@angular/forms': 'ng.forms',
-    '@angular/common': 'ng.common',
-    'rxjs/Observable': 'Rx',
-    'rxjs/ReplaySubject': 'Rx',
-    'rxjs/add/operator/map': 'Rx.Observable.prototype',
-    'rxjs/add/operator/mergeMap': 'Rx.Observable.prototype',
-    'rxjs/add/observable/fromEvent': 'Rx.Observable',
-    'rxjs/add/observable/of': 'Rx.Observable'
-  },
-  external: [ '@angular/core', '@angular/forms', '@angular/common' ]
+  external: [ '@angular/core', '@angular/forms', '@angular/common' ],
+  onwarn: ( warning ) => {
+      const skip_codes = [
+          'THIS_IS_UNDEFINED',
+          'MISSING_GLOBAL_NAME'
+      ];
+      if ( skip_codes.indexOf(warning.code) != -1 ) return;
+      console.error(warning);
+  }
 }

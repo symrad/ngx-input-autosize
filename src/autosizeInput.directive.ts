@@ -1,28 +1,19 @@
 import { NgModel, NgControl } from '@angular/forms';
 import { AutosizeComponent } from './autosizeInput.component';
 import { ElementRef, HostListener, Directive, AfterContentChecked, OnInit,
-    ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+    ViewChild, ViewContainerRef, ComponentFactoryResolver, AfterViewChecked } from '@angular/core';
 
 @Directive({
     selector: 'input[autosize]'
 })
 
-export class AutosizeDirective implements AfterContentChecked, OnInit {
-    base: number;
-    supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
-    cssProps = [
-        'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
-        'letterSpacing', 'textTransform', 'wordSpacing', 'textIndent',
-        'boxSizing', 'borderLeftWidth', 'borderRightWidth', 'borderLeftStyle', 'borderRightStyle',
-        'paddingLeft', 'paddingRight', 'marginLeft', 'marginRight'
-    ];
-    autosizeComponent: AutosizeComponent;
-    placeholderAutoSizeComponent: AutosizeComponent;
-    placeholder: String = '';
-
-    @HostListener('input', ['$event.target']) onInput(textArea: HTMLInputElement): void {
-        this.adjust();
-    }
+export class AutosizeDirective implements AfterContentChecked, OnInit, AfterViewChecked {
+    public base: number;
+    public supportedInputTypes:any;
+    public cssProps:any;
+    public autosizeComponent: AutosizeComponent;
+    public placeholderAutoSizeComponent: AutosizeComponent;
+    public placeholder: String;
 
     constructor(
         private resolver: ComponentFactoryResolver,
@@ -30,7 +21,18 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
         private vc: ViewContainerRef,
         private ngControl: NgControl
     ) {
+        this.supportedInputTypes = ['text', 'search', 'tel', 'url', 'email', 'password', 'number'];
+        this.cssProps = [
+            'fontSize', 'fontFamily', 'fontWeight', 'fontStyle',
+            'letterSpacing', 'textTransform', 'wordSpacing', 'textIndent',
+            'boxSizing', 'borderLeftWidth', 'borderRightWidth', 'borderLeftStyle', 'borderRightStyle',
+            'paddingLeft', 'paddingRight', 'marginLeft', 'marginRight'
+        ];
+        this.placeholder = '';
+    }
 
+    @HostListener('input', ['$event.target']) onInput(textArea: HTMLInputElement): void {
+        this.adjust();
     }
 
     ngOnInit() {
@@ -61,6 +63,10 @@ export class AutosizeDirective implements AfterContentChecked, OnInit {
     }
 
     ngAfterContentChecked(): void {
+        this.adjust();
+    }
+
+    ngAfterViewChecked() {
         this.adjust();
     }
 
