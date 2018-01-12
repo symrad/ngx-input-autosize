@@ -53,7 +53,7 @@ export class AutosizeDirective implements AfterContentChecked, OnInit, AfterView
 
         if (this.ngControl.valueChanges) {
             this.ngControl.valueChanges.subscribe(response => {
-                this.autosizeComponent.autosizeValue = response;
+                this.autosizeComponent.autosizeValue = this.element.nativeElement.value;
                 if (this.element.nativeElement.placeholder) {
                     this.placeholder = this.element.nativeElement.placeholder;
                 }

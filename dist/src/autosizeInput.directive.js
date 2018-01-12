@@ -38,7 +38,7 @@ var AutosizeDirective = (function () {
         }
         if (this.ngControl.valueChanges) {
             this.ngControl.valueChanges.subscribe(function (response) {
-                _this.autosizeComponent.autosizeValue = response;
+                _this.autosizeComponent.autosizeValue = _this.element.nativeElement.value;
                 if (_this.element.nativeElement.placeholder) {
                     _this.placeholder = _this.element.nativeElement.placeholder;
                 }
