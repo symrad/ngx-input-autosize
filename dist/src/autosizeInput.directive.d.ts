@@ -14,6 +14,7 @@ export declare class AutosizeDirective implements AfterContentChecked, OnInit, A
     placeholder: String;
     constructor(resolver: ComponentFactoryResolver, element: ElementRef, vc: ViewContainerRef, ngControl: NgControl);
     onInput(textArea: HTMLInputElement): void;
+    autosizeProp: any;
     ngOnInit(): void;
     ngAfterContentChecked(): void;
     ngAfterViewChecked(): void;

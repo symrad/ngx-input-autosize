@@ -1,6 +1,6 @@
 import { NgControl } from '@angular/forms';
 import { AutosizeComponent } from './autosizeInput.component';
-import { ElementRef, HostListener, Directive, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { ElementRef, HostListener, Directive, ViewContainerRef, ComponentFactoryResolver, Input } from '@angular/core';
 var AutosizeDirective = (function () {
     function AutosizeDirective(resolver, element, vc, ngControl) {
         this.resolver = resolver;
@@ -38,7 +38,12 @@ var AutosizeDirective = (function () {
         }
         if (this.ngControl.valueChanges) {
             this.ngControl.valueChanges.subscribe(function (response) {
-                _this.autosizeComponent.autosizeValue = _this.element.nativeElement.value;
+                _this.autosizeComponent.autosizeValue = response;
+                if (typeof response == 'object') {
+                    if (_this.autosizeProp && response) {
+                        _this.autosizeComponent.autosizeValue = response[_this.autosizeProp];
+                    }
+                }
                 if (_this.element.nativeElement.placeholder) {
                     _this.placeholder = _this.element.nativeElement.placeholder;
                 }
@@ -78,5 +83,6 @@ AutosizeDirective.ctorParameters = function () { return [
 ]; };
 AutosizeDirective.propDecorators = {
     'onInput': [{ type: HostListener, args: ['input', ['$event.target'],] },],
+    'autosizeProp': [{ type: Input, args: ['autosizeProp',] },],
 };
 //# sourceMappingURL=autosizeInput.directive.js.map

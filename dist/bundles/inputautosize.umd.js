@@ -63,7 +63,12 @@ var AutosizeDirective = (function () {
         }
         if (this.ngControl.valueChanges) {
             this.ngControl.valueChanges.subscribe(function (response) {
-                _this.autosizeComponent.autosizeValue = _this.element.nativeElement.value;
+                _this.autosizeComponent.autosizeValue = response;
+                if (typeof response == 'object') {
+                    if (_this.autosizeProp && response) {
+                        _this.autosizeComponent.autosizeValue = response[_this.autosizeProp];
+                    }
+                }
                 if (_this.element.nativeElement.placeholder) {
                     _this.placeholder = _this.element.nativeElement.placeholder;
                 }
@@ -102,6 +107,7 @@ AutosizeDirective.ctorParameters = function () { return [
 ]; };
 AutosizeDirective.propDecorators = {
     'onInput': [{ type: core.HostListener, args: ['input', ['$event.target'],] },],
+    'autosizeProp': [{ type: core.Input, args: ['autosizeProp',] },],
 };
 
 var AutosizeInputModule = (function () {

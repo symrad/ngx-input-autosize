@@ -1,7 +1,7 @@
 import { NgModel, NgControl } from '@angular/forms';
 import { AutosizeComponent } from './autosizeInput.component';
 import { ElementRef, HostListener, Directive, AfterContentChecked, OnInit,
-    ViewChild, ViewContainerRef, ComponentFactoryResolver, AfterViewChecked } from '@angular/core';
+    ViewChild, ViewContainerRef, ComponentFactoryResolver, AfterViewChecked, Input } from '@angular/core';
 
 @Directive({
     selector: 'input[autosize]'
@@ -35,6 +35,8 @@ export class AutosizeDirective implements AfterContentChecked, OnInit, AfterView
         this.adjust();
     }
 
+    @Input('autosizeProp') autosizeProp:any;
+
     ngOnInit() {
         const factory = this.resolver.resolveComponentFactory(AutosizeComponent);
         this.autosizeComponent = this.vc.createComponent(factory).instance;
@@ -53,7 +55,12 @@ export class AutosizeDirective implements AfterContentChecked, OnInit, AfterView
 
         if (this.ngControl.valueChanges) {
             this.ngControl.valueChanges.subscribe(response => {
-                this.autosizeComponent.autosizeValue = this.element.nativeElement.value;
+                this.autosizeComponent.autosizeValue = response;
+                if(typeof response == 'object'){
+                    if(this.autosizeProp && response){
+                        this.autosizeComponent.autosizeValue = response[this.autosizeProp];
+                    }
+                }
                 if (this.element.nativeElement.placeholder) {
                     this.placeholder = this.element.nativeElement.placeholder;
                 }
